@@ -3,24 +3,23 @@ package org.example.io.input;
 import org.example.model.User;
 import org.example.util.CustomArrayList;
 import org.example.util.CustomCollection;
-
 import com.ibm.icu.text.Transliterator;
 import java.util.Random;
 import java.util.stream.IntStream;
 
-public class RandomInput implements Input {
+public class RandomUserGenerator implements Input {
     private final int countElements;
     private static final String[] names = "Александр,Алексей,Андрей,Антон,Артем,Борис,Вадим,Валентин,Валерий,Василий,Виктор,Владимир,Владислав,Денис,Яна,Mary,Robert,Patricia,Jennifer,Linda,Elizabeth,David,Joseph,Susan,Thomas,Jessica,Christopher,Karen".split(",");
     private static final String[] domains = "gmail.com,yandex.ru,mail.ru,inbox.ru,list.ru,bk.ru,rambler.ru,outlook.com,hotmail.com,yahoo.com,aol.com,protonmail.com,mail.com,gmx.com,icloud.com".split(",");
     private final Random random = new Random();
     private static final Transliterator TRANSLITERATOR = Transliterator.getInstance("Russian-Latin/BGN");
 
-    public RandomInput(int countElements) {
+    public RandomUserGenerator(int countElements) {
         this.countElements = countElements;
     }
 
     @Override
-    public CustomCollection<User> read() {
+    public CustomCollection<User> generateUsers() {
         return IntStream.range(0, countElements)
                 .mapToObj(i -> createRandomUsers(i))
                 .collect(
