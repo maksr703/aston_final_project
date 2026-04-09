@@ -45,7 +45,7 @@ public class FileInput implements Input {
 
                     );
         } catch (IOException e) {
-            throw new RuntimeException("Ошибка чтения файла: "+ filePath +": "+e.getMessage());
+            throw new RuntimeException("Ошибка при чтении файла: "+ filePath +": "+e.getMessage());
         }
     }
 }
