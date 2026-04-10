@@ -15,6 +15,9 @@ public class RandomUserGenerator implements Input {
     private static final Transliterator TRANSLITERATOR = Transliterator.getInstance("Russian-Latin/BGN");
 
     public RandomUserGenerator(int countElements) {
+        if(countElements < 0){
+            throw new IllegalArgumentException("Count elements cannot be negative: " + countElements);
+        }
         this.countElements = countElements;
     }
 
