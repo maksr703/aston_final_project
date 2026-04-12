@@ -1,8 +1,7 @@
-import java.util.Comparator;
+import java.util.*;
 
-public class SortByEvenPassword implements Comparator<User> {
-    @Override
-    public void sort(List<User> users) {
+public class UserPasswordSorter {
+    #public static void sortByEvenPassword(List<User> users) {
         List<Map.Entry<Integer, User>> evenPasswordUsers = new ArrayList<>();
         for (int i = 0; i < users.size(); i++) {
             if (users.get(i).isPasswordEven()) {
@@ -13,7 +12,8 @@ public class SortByEvenPassword implements Comparator<User> {
             try {
                 return Integer.parseInt(e.getValue().getPassword());
             } catch (NumberFormatException ex) {
-                return 0; 
+                System.err.println("Ошибка преобразования пароля: " + e.getValue().getPassword());
+                return 0;
             }
         }));
         Iterator<Map.Entry<Integer, User>> evenIterator = evenPasswordUsers.iterator();
