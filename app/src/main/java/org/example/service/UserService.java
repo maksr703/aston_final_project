@@ -50,7 +50,7 @@ public class UserService {
     }
 
     public void sortByEvenPassword() {
-        // TODO
+        sorting.sort(users, UserComparators.byEvenPassword());// TODO
     }
 
     public void countByEmailDomain(String input) {

@@ -43,6 +43,14 @@ public class User {
             return new User(name, password, email);
         }
     }
+    public boolean isPasswordEven() {
+    try {
+        int passwordValue = Integer.parseInt(this.password);
+        return passwordValue % 2 == 0;
+    } catch (NumberFormatException e) {
+        return false;
+    }
+}
 
     @Override
     public String toString() {
