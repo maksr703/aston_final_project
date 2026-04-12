@@ -69,9 +69,7 @@ public class UI {
                 continue;
             }
 
-            System.out.print("Найдено: ");
-            userService.countByEmailDomain(input);
-
+            System.out.print("Найдено: " + userService.countByEmailDomain(input));
             pause();
         }
     }
@@ -213,7 +211,7 @@ public class UI {
             }
 
             Input input = new RandomUserGenerator(count);
-            userService.addUsers(input.read());
+            userService.addUsers(input.generateUsers());
 
             break;
         }

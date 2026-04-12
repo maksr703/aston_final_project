@@ -17,11 +17,18 @@ repositories {
 
 dependencies {
     implementation 'com.ibm.icu:icu4j:73.2'
-    testImplementation 'org.junit.jupiter:junit-jupiter-params:5.9.2'
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.2'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.2'
-}
 
+    // JUnit 4
+    testImplementation 'junit:junit:4.13.2'
+
+    // JUnit 5
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.2'
+    testImplementation 'org.junit.jupiter:junit-jupiter-params:5.9.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.2'
+
+    // 🔥 ВАЖНО: мост между JUnit 4 и 5
+    testRuntimeOnly 'org.junit.vintage:junit-vintage-engine:5.9.2'
+}
 // Apply a specific Java toolchain to ease working on different environments.
 java {
     toolchain {
@@ -34,13 +41,6 @@ application {
     mainClass = 'org.example.App'
     applicationDefaultJvmArgs = ["-Dfile.encoding=UTF-8"]
 }
-
-tasks.withType(JavaExec) {
-    systemProperty "file.encoding", "UTF-8"
-    standardInput = System.in
-    jvmArgs "-Dfile.encoding=UTF-8"
-}
-tasks.withType(GroovyCompile).configureEach { groovyOptions.encoding = 'UTF-8' }
 
 test {
     useJUnitPlatform()

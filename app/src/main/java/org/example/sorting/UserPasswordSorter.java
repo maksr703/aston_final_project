@@ -1,7 +1,12 @@
+package org.example.sorting;
+
+import org.example.model.User;
+import org.example.util.CustomCollection;
+
 import java.util.*;
 
 public class UserPasswordSorter {
-    #public static void sortByEvenPassword(List<User> users) {
+    public static void sortByEvenPassword(CustomCollection<User> users) {
         List<Map.Entry<Integer, User>> evenPasswordUsers = new ArrayList<>();
         for (int i = 0; i < users.size(); i++) {
             if (users.get(i).isPasswordEven()) {

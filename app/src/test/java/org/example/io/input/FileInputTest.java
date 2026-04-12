@@ -1,6 +1,5 @@
-package io.input;
+package org.example.io.input;
 
-import org.example.io.input.FileInput;
 import org.example.model.User;
 import org.example.util.CustomCollection;
 import org.junit.After;
