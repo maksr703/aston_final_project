@@ -3,7 +3,7 @@ package org.example.ui;
 import org.example.io.input.ConsoleInput;
 import org.example.io.input.FileInput;
 import org.example.io.input.Input;
-import org.example.io.input.RandomInput;
+import org.example.io.input.RandomUserGenerator;
 import org.example.io.output.ConsoleOutput;
 import org.example.io.output.FileOutput;
 import org.example.service.UserService;
@@ -69,9 +69,7 @@ public class UI {
                 continue;
             }
 
-            System.out.print("Найдено: ");
-            userService.countByEmailDomain(input);
-
+            System.out.print("Найдено: " + userService.countByEmailDomain(input));
             pause();
         }
     }
@@ -212,8 +210,8 @@ public class UI {
                 continue;
             }
 
-            Input input = new RandomInput(count);
-            userService.addUsers(input.read());
+            Input input = new RandomUserGenerator(count);
+            userService.addUsers(input.generateUsers());
 
             break;
         }

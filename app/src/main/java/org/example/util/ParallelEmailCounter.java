@@ -2,10 +2,14 @@ package org.example.util;
 
 import org.example.model.User;
 
-public class ParallelEmailCounter {
-    public static void count(CustomCollection<User> source, String target) {
-        long count = 0; //TODO
+import java.util.Objects;
+import java.util.stream.StreamSupport;
 
-        System.out.println(count);
+public class ParallelEmailCounter {
+    public static int count(CustomCollection<User> source, String target) {
+        return (int) StreamSupport.stream(source.spliterator(), true)
+                .filter(Objects::nonNull)
+                .filter(user -> user.getEmail().endsWith(target))
+                .count();
     }
 }

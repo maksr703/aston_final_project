@@ -5,6 +5,7 @@ import org.example.model.User;
 import org.example.sorting.QuickSort;
 import org.example.sorting.Sorting;
 import org.example.sorting.UserComparators;
+import org.example.sorting.UserPasswordSorter;
 import org.example.util.CustomArrayList;
 import org.example.util.ParallelEmailCounter;
 import org.example.util.CustomCollection;
@@ -29,10 +30,6 @@ public class UserService {
         users.add(data);
     }
 
-    public CustomCollection<User> getUsers() {
-        return users;
-    }
-
     public void outputUsers(Output output) {
         output.write(users);
     }
@@ -50,10 +47,10 @@ public class UserService {
     }
 
     public void sortByEvenPassword() {
-        // TODO
+        UserPasswordSorter.sortByEvenPassword(users);
     }
 
-    public void countByEmailDomain(String input) {
-        ParallelEmailCounter.count(users, input);
+    public int countByEmailDomain(String input) {
+        return ParallelEmailCounter.count(users, input);
     }
 }
