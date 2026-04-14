@@ -84,24 +84,61 @@ public class CustomArrayList<T> implements CustomCollection<T> {
     }
 
     @Override
-    public void forEach(Consumer<? super T> action) {
-        for (int i = 0; i < size; i++) {
-            action.accept(data[i]);
-        }
-    }
-
-    @Override
     public Spliterator<T> spliterator() {
-        return new Spliterators.AbstractSpliterator<T>(size, 0) {
+        return new Spliterators.AbstractSpliterator<T>(
+                size,
+                Spliterator.ORDERED | Spliterator.SIZED | Spliterator.SUBSIZED
+        ) {
             private int index = 0;
+            private final int border = size;
 
             @Override
             public boolean tryAdvance(Consumer<? super T> action) {
-                if (index < size) {
+                if (index < border) {
                     action.accept(data[index++]);
                     return true;
                 }
                 return false;
+            }
+
+            @Override
+            public Spliterator<T> trySplit() {
+                int low = index;
+                int high = border;
+
+                int mid = (low + high) / 2;
+
+                if (low >= mid) {
+                    return null;
+                }
+
+                index = mid;
+
+                return new Spliterators.AbstractSpliterator<T>(
+                        mid - low,
+                        Spliterator.ORDERED | Spliterator.SIZED | Spliterator.SUBSIZED
+                ) {
+                    private int i = low;
+
+                    @Override
+                    public boolean tryAdvance(Consumer<? super T> action) {
+                        if (i < mid) {
+                            action.accept(data[i++]);
+                            return true;
+                        }
+                        return false;
+                    }
+
+                    @Override
+                    public long estimateSize() {
+                        return mid - i;
+                    }
+                };
+            }
+
+            @Override
+            public long estimateSize() {
+                return border - index;
             }
         };
     }
